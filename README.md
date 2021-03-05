@@ -1,4 +1,4 @@
 # TrySourceGenerator
 Trying Source Generator first time
 
-Goal: Code Weaving by adding [ProducesResponseType] attribute to Controller Classes
+Goal: Generate and weave [ProducesResponseType] attribute to Controller Classes during compiletime using SourceGenerator
