@@ -1,28 +1,42 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Collections.Generic;
-using Microsoft.AspNetCore.Authorization;
 using System.Net;
-using System.Web.Mvc;
+using System.Threading.Tasks;
 
 namespace TestSourceLibrary
 {
-    [Route("test")]
+    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = true, Inherited = true)]
+    sealed class MyRouteAttribute : RouteAttribute
+    {
+        public MyRouteAttribute(string template) : base(template)
+        {
+        }
+    }
+
+    [MyRoute("test")]
     public partial class Class1 : Controller
     {
         [HttpPost("search")]
         [Authorize]
-        public IEnumerable<int> Test()
+        public partial IEnumerable<int> Test()
         {
-            return null;
+            return new[] { 0 };
         }
 
         [HttpPost("search")]
-        public Task<IEnumerable<int>> Test1()
+        public partial Task<IEnumerable<int>> Test1()
         {
             return null;
+        }
+    }
+
+    public static class Program
+    {
+        public static void Main()
+        {
+
         }
     }
 }
