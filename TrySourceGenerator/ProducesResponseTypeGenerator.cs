@@ -19,8 +19,8 @@ namespace TrySourceGenerator
         {
             try
             {
-                var routeAttribute = context.Compilation.GetTypeByMetadataName(RouteAttribute);
                 var index = 0;
+                var routeAttribute = context.Compilation.GetTypeByMetadataName(RouteAttribute);
                 if (context.SyntaxReceiver is SyntaxReceiver receiver &&
                     receiver.CandidateClasses.Count > 0)
                 {
@@ -95,20 +95,6 @@ namespace TrySourceGenerator
         public void Initialize(GeneratorInitializationContext context)
         {
             context.RegisterForSyntaxNotifications(() => new SyntaxReceiver());
-        }
-    }
-
-    public class SyntaxReceiver : ISyntaxReceiver
-    {
-        public List<ClassDeclarationSyntax> CandidateClasses = new();
-
-        public void OnVisitSyntaxNode(SyntaxNode node)
-        {
-            if (node is ClassDeclarationSyntax classSyntax &&
-                classSyntax.Modifiers.Any(SyntaxKind.PublicKeyword) &&
-                classSyntax.Modifiers.Any(SyntaxKind.PartialKeyword) &&
-                classSyntax.AttributeLists.Count > 0)
-                CandidateClasses.Add(classSyntax);
         }
     }
 }
