@@ -20,7 +20,7 @@ namespace TestSourceLibrary
     {
         [HttpPost("search")]
         [Authorize]
-        public partial IEnumerable<int> Test()
+        public partial IEnumerable<int> Test([FromBody] int a)
         {
             return new[] { 0 };
         }

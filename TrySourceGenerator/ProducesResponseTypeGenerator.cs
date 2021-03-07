@@ -61,7 +61,7 @@ namespace TrySourceGenerator
                     partial class {@class.Identifier}
                     {{
                         [Microsoft.AspNetCore.Mvc.ProducesResponseType(typeof({produceResponseType.ToDisplayString()}), (System.Int32)System.Net.HttpStatusCode.OK)]
-                        public partial {method.ReturnType} {method.Identifier}{method.ParameterList};
+                        public partial {method.ReturnType} {method.Identifier}{ method.ParameterList.WithoutAttributes()};
                     }}
                 }}";
         }

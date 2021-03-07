@@ -9,6 +9,12 @@ namespace TrySourceGenerator
 {
     internal static class RosylynExtensions
     {
+        public static ParameterListSyntax WithoutAttributes(this ParameterListSyntax parameterList)
+        {
+            var methodParameterAttributes = parameterList.Parameters.SelectMany(p => p.AttributeLists);
+            return parameterList.RemoveNodes(methodParameterAttributes, SyntaxRemoveOptions.KeepNoTrivia);
+        }
+
         public static IEnumerable<AttributeSyntax> GetAttributes(
             this SyntaxList<AttributeListSyntax> attributes)
         {
